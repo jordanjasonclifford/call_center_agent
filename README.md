@@ -82,7 +82,7 @@ Then open `.env` and fill in your Anthropic API key. Best found at https://platf
 
 ---
 
-## Running
+## Run The Application
 
 ### Web Interface (recommended)
 
@@ -91,7 +91,7 @@ cd web
 python app.py
 ```
 
-Open `http://localhost:5000` / 'http://127.0.0.1:5000/' in your browser. Select a lead persona, click **Start Call**, then hold the button to speak.
+Open `http://localhost:5000' / 'http://127.0.0.1:5000/' in your browser. Select a lead persona, click **Start Call**, then hold the button to speak.
 
 ### Terminal (CLI)
 
@@ -124,7 +124,7 @@ A versioned snapshot is saved to `scripts/versions/script_vN.json` and the full 
 
 | Persona | Objection | Notes |
 |---|---|---|
-| **Jean Doe** | None | Blank slate — mirrors the caller's energy exactly |
+| **Jean Doe** | None | Blank slate, mirrors the caller's energy exactly |
 | **Karen** | `already_have_crm` | Just renewed Salesforce, hostile, will not convert |
 | **Devin** | `not_the_right_time` | Mid-quarter crunch, responds to urgency |
 | **Rachel** | `too_expensive` | Budget-locked RevOps lead, analytical, numbers-focused |
