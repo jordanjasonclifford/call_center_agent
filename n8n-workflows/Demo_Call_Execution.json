@@ -1,0 +1,286 @@
+{
+  "name": "Demo_Call_Execution",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        -32
+      ],
+      "id": "b259ce90-777e-4b11-ba90-a40acd3c142d",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "taLpLYvz2eZqBFmy",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/taLpLYvz2eZqBFmy",
+          "cachedResultName": "Demo_Improvement_Loop"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        1280,
+        -16
+      ],
+      "id": "0b2d9fe1-5468-4bdd-9e27-51ccd14d9fe7",
+      "name": "Call 'Improvement Loop'"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-5-20250929",
+          "cachedResultName": "Claude Sonnet 4.5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        560,
+        208
+      ],
+      "id": "2f697275-0ac8-41a0-97c0-0f1a7b5b0ba8",
+      "name": "Anthropic Chat Model",
+      "credentials": {
+        "anthropicApi": {
+          "id": "PryvsmmUpjWm6wyZ",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        -272
+      ],
+      "id": "1de38a1d-d78e-463d-bba3-1bcacf63290f",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "fileSelector": "scripts/current_script.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        48,
+        -176
+      ],
+      "id": "ca16546b-cf62-4371-aa7f-7d48e80faf0d",
+      "name": "Read JSON of Current Script"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are simulating a complete sales call between Ava (sales rep for PipelineIQ) and a lead.\n\nScript Ava must follow:\n{{ $json.script }}\n\nLead persona:\n{{ $json.persona }}\n\nSimulate 6–8 conversation turns. Format the output EXACTLY like this:\n\nAVA: [what Ava says]\nLEAD: [how the lead responds]\nAVA: [next line]\n...\n\nAfter the last turn, output one of these on its own line:\n[OUTCOME: success]\n[OUTCOME: failed]\n[OUTCOME: neutral]\n",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        656,
+        -16
+      ],
+      "id": "404b4925-c200-4ec0-a53d-04b02df1b412",
+      "name": "Ava - LLM Agent"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8e0b696f-b992-4a47-a10d-5ff778abeaea",
+              "name": "script",
+              "value": "={{ $json.data[0].clean_script }}\n",
+              "type": "string"
+            },
+            {
+              "id": "e97bc65c-cce0-4a22-a3b8-988492f94bbf",
+              "name": "persona",
+              "value": "{       \"name\": \"Karen\",       \"role\": \"VP of Sales, just renewed Salesforce last month\",       \"behavior\": \"Instantly hostile. Just signed a 2-year Salesforce deal and does NOT want to hear this. Will interrupt repeatedly, mention the contract cost, and actively try to end the call. Even if Ava mentions adoption, Karen deflects — she cannot admit the problem publicly because she championed the Salesforce renewal internally. She will NOT agree to a demo. At best she says 'send me something' and hangs up.\",       \"primary_objection\": \"already_have_crm\",       \"secondary_behavior\": \"Acknowledges adoption is a problem privately but will not commit to anything on the call. The sunk cost of the Salesforce renewal makes her defensive. She ends the call without booking.\",       \"description\": \"The locked-in Salesforce customer — does not convert\",       \"tone\": \"Impatient, defensive, dismissive. Does not soften.\"     }",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        464,
+        -160
+      ],
+      "id": "ff3f094a-e3ea-45a4-9e58-ecbc55dc1d50",
+      "name": "Set Script + Persona"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cd0f717b-883a-4cbb-b5e0-72493423dc61",
+              "name": "transcript",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            },
+            {
+              "id": "93d742c1-e3fa-4f8f-9b82-065b43c6f097",
+              "name": "=outcome",
+              "value": "={{ $json.text.match(/\\[OUTCOME: (\\w+)\\]/)?.[1] ?? 'neutral' }}",
+              "type": "string"
+            },
+            {
+              "id": "f9a6139a-6b94-4077-9d80-e728c7d492d7",
+              "name": "version",
+              "value": "={{ JSON.parse($('Set Script + Persona').item.json.script).script_version }}\n",
+              "type": "number"
+            },
+            {
+              "id": "b0609763-6a1f-430e-b561-2cef8060f5f9",
+              "name": "script",
+              "value": "={{ $('Set Script + Persona').item.json.script }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1040,
+        -16
+      ],
+      "id": "9faa5823-bce0-42c4-bcfd-597d98af5b9c",
+      "name": "Format Transcript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Read JSON of Current Script",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Ava - LLM Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'Improvement Loop'": {
+      "main": [
+        []
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Set Script + Persona",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read JSON of Current Script": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ava - LLM Agent": {
+      "main": [
+        [
+          {
+            "node": "Format Transcript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Script + Persona": {
+      "main": [
+        [
+          {
+            "node": "Ava - LLM Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Transcript": {
+      "main": [
+        [
+          {
+            "node": "Call 'Improvement Loop'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "170d41a7-3117-4457-bdd8-104658531be5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3cba8292468c83e3881b8c5c0d4e870543f863d70eea623e1ab9673c0174df58"
+  },
+  "id": "qGGJI7b5P4L7K7Qv",
+  "tags": [
+    {
+      "updatedAt": "2026-04-10T02:34:42.861Z",
+      "createdAt": "2026-04-10T02:34:42.861Z",
+      "id": "l1Tde2botiTi2was",
+      "name": "N8N_DEMO"
+    }
+  ]
+}

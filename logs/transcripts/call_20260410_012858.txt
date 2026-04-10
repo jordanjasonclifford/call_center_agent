@@ -1,0 +1,17 @@
+Outcome: failed
+Script version used: 3
+Analysis: {
+  "outcome": "failed",
+  "primary_objection": "none",
+  "failure_point": "opener",
+  "reached_close": false,
+  "recommendation": "Reframe the opener to lead with a positive value statement rather than a pain-point assumption that can feel presumptuous or critical to prospects who are sensitive about their current processes."
+}
+
+AVA: Hey, this is Ava from SalesNest — quick question, takes 20 seconds. Do your reps actually log their activity in whatever tool you're using, or does your pipeline visibility basically depend on who remembers to update it?
+LEAD: If a don't insult our company, okay, do not do that to us.
+AVA: Fair enough, that's not my intention at all — I'm just asking because it's the number one thing I hear from sales leaders, and it's usually not a people problem, it's a tool problem. How are you currently tracking your deals and pipeline — are you in a CRM or something more homegrown?
+LEAD: And you're insulting our tools now, all right, please stop talking to me. Goodbye
+AVA: No worries at all — I appreciate your time. If things change, we're easy to find.
+
+[OUTCOME: failed]

@@ -1,0 +1,19 @@
+Outcome: success
+Script version used: 3
+Analysis: {"outcome": "success", "primary_objection": "not_the_right_time", "failure_point": "none", "reached_close": true, "recommendation": "Confirm specific day rather than 'one day' to avoid scheduling ambiguity when the lead gives a vague time preference."}
+
+AVA: Hey, this is Ava from SalesNest — quick question, takes 20 seconds. Do your reps actually log their activity in whatever tool you're using, or does your pipeline visibility basically depend on who remembers to update it?
+LEAD: Our reps log their activity, but the visibility has not been clear the past few days to me.
+AVA: That's actually really common — the logging happens but the visibility still feels like a guessing game. How are you currently tracking your deals and pipeline — are you in a CRM or something more homegrown?
+LEAD: Yes, we use Salesforce. It's kind of expensive though.
+AVA: I hear that a lot from teams coming off Salesforce — we're about a third of the price and you're not paying for features your team will never touch. Most teams break even in the first month. Would you be open to a 10-minute demo this week so you can actually see how SalesNest compares?
+LEAD: A third of the price, wow. I mean, we just renewed our contract, so it's not like we can take on two at the same time, you know?
+AVA: Completely understand — when does your Salesforce contract come up for renewal? Because that's actually the perfect time to make the switch, and I'd love to make sure you're on our radar before that decision gets made.
+LEAD: Two months, but honestly, Eva, I like you.  I'm really open to this because I have not been enjoying Salesforce since we've been using it.
+AVA: I love hearing that — and two months is actually perfect timing to get ahead of it. Can we lock in a quick 10-minute demo this week so you can see the product and have something concrete to compare when that renewal decision comes up? Does Tuesday or Wednesday work, morning or afternoon?
+LEAD: One day, afternoon works best for me.
+AVA: Perfect — let's do Tuesday afternoon! I'll send you a calendar invite right now, just confirm your email and we'll get it locked in.
+LEAD: My email is follow at gmail.com
+AVA: Got it — sending that over now, you'll see it in your inbox shortly. Really looking forward to showing you what SalesNest can do, I think it's going to click fast for you.
+
+[OUTCOME: success]

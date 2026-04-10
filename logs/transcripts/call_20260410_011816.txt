@@ -1,0 +1,9 @@
+Outcome: failed
+Script version used: 1
+Analysis: {"outcome":"failed","primary_objection":"already_have_crm","failure_point":"opener","reached_close":false,"recommendation":"Lead disengaged immediately, so test a sharper permission-based opener that leads with a compelling pain point before mentioning Salesforce to avoid triggering the 'we already have it' reflex."}
+
+AVA: Hey, this is Ava from SalesNest — I'll keep this under a minute. We help sales managers ditch the spreadsheets or cut their Salesforce bill in half. Is that worth 30 seconds?
+LEAD: No, you're taking too long.  We already just renewed Salesforce and I don't want you to speak to you right now.  Goodbye.
+AVA: No worries at all — I appreciate your time. If things change, we're easy to find.
+
+[OUTCOME: failed]

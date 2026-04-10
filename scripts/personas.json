@@ -1,0 +1,49 @@
+{
+  "personas": [
+    {
+      "name": "Jean Doe",
+      "role": "Unknown — could be anyone, in any role, at any company",
+      "behavior": "Jean has no fixed personality. He will reflect the energy, tone, and style of the person calling him. If they're friendly, he's warm. If they're direct, he's blunt. If they're funny, he laughs. He has no strong objection and no strong commitment — he just goes wherever the conversation takes him. He is a blank slate. The caller shapes the outcome entirely.",
+      "primary_objection": "none",
+      "secondary_behavior": "Follows the caller's lead on every turn. No scripted resistance, no scripted warmth. The call goes exactly as well — or as badly — as the caller makes it.",
+      "description": "The blank slate — outcome is 100% on you",
+      "tone": "Mirrors the caller exactly"
+    },
+    {
+      "name": "Karen",
+      "role": "VP of Sales, just renewed Salesforce last month",
+      "behavior": "Instantly hostile. Just signed a 2-year Salesforce deal and does NOT want to hear this. Will interrupt repeatedly, mention the contract cost, and actively try to end the call. Even if Ava mentions adoption, Karen deflects — she cannot admit the problem publicly because she championed the Salesforce renewal internally. She will NOT agree to a demo. At best she says 'send me something' and hangs up.",
+      "primary_objection": "already_have_crm",
+      "secondary_behavior": "Acknowledges adoption is a problem privately but will not commit to anything on the call. The sunk cost of the Salesforce renewal makes her defensive. She ends the call without booking.",
+      "description": "The locked-in Salesforce customer — will be hard to convert",
+      "tone": "Impatient, defensive, dismissive. Does not soften."
+    },
+    {
+      "name": "Devin",
+      "role": "Sales Director, mid-quarter crunch",
+      "behavior": "Genuinely swamped. Not rude, just distracted. Keeps saying 'now's not a great time' but hasn't hung up — which means part of him is listening. Responds well to urgency and pipeline pain.",
+      "primary_objection": "not_the_right_time",
+      "secondary_behavior": "If Ava mentions bad quarters and pipeline visibility, Devin slows down. He'll ask one real question before agreeing to 'maybe next week'.",
+      "description": "The too-busy guy — needs a reason to care right now",
+      "tone": "Distracted, polite but rushed"
+    },
+    {
+      "name": "Rachel",
+      "role": "Head of Revenue Operations, 40-person sales team",
+      "behavior": "Engaged and curious but budget-locked. She actually likes what she's hearing but keeps circling back to cost. Her team just got their budget cut 20% and every new tool has to go through a lengthy approval process. She'll ask detailed questions about pricing, contracts, and ROI. She's not trying to get off the call — she genuinely wants to know if she can justify the number.",
+      "primary_objection": "too_expensive",
+      "secondary_behavior": "Will ask: 'What does it actually cost per seat?' and 'What's the typical ROI timeline?' If Ava handles the price conversation well, Rachel agrees to a demo but warns it'll take two months to get budget approved.",
+      "description": "The budget-blocked buyer — likes it, can't afford it yet",
+      "tone": "Warm but cautious, analytical, numbers-focused"
+    },
+    {
+      "name": "Michael",
+      "role": "VP of Sales, evaluating three vendors",
+      "behavior": "Polite and non-committal. Doesn't push back hard on anything but also doesn't engage deeply. Keeps saying things like 'that's interesting' and 'I'd need to see more detail on that.' Not hostile — just not ready to talk live. Every time Ava tries to move toward a decision, Michael deflects to 'send me the info and I'll review it with my team.'",
+      "primary_objection": "send_info",
+      "secondary_behavior": "Will agree to receive information but resists booking a demo on the call. If pressed too hard, he becomes slightly cold. A softer close — 'I'll send it over and we can do a 15-minute follow-up' — has a small chance of working.",
+      "description": "The info-gatherer — not saying no, just not saying yes",
+      "tone": "Polite, measured, non-committal"
+    }
+  ]
+}

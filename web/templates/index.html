@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SalesNest - AI Call Agent</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <header>
+      <h1>SalesNest <span>AI Call Agent</span></h1>
+      <div class="version-badge" id="version-badge">Script v{{ script_version }}</div>
+    </header>
+
+    <!-- Persona selection screen -->
+    <div id="setup-screen" class="screen active">
+
+      <div class="ava-intro">
+        <img src="/static/ava_bot.png" alt="Ava">
+        <div class="ava-intro-name">Meet Ava</div>
+        <div class="ava-intro-tagline">Your AI sales rep — pick a lead to call</div>
+      </div>
+
+      <h2>Select a persona to call as</h2>
+      <div class="persona-list" id="persona-list">
+        {% for p in personas %}
+        <div class="persona-card" data-persona='{{ p | tojson }}'>
+          <div class="persona-name">{{ p.name }}</div>
+          <div class="persona-role">{{ p.role }}</div>
+          <div class="persona-desc">{{ p.description }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      <button id="start-btn" class="btn btn-primary" disabled>Start Call</button>
+    </div>
+
+    <!-- Active call screen -->
+    <div id="call-screen" class="screen">
+      <div class="call-header">
+        <div class="call-info">
+          <img src="/static/ava_bot.png" alt="Ava" class="ava-call-avatar">
+          <span id="call-persona-name">--</span>
+          <span class="call-status" id="call-status">Connected</span>
+        </div>
+      </div>
+
+      <div class="transcript" id="transcript"></div>
+
+      <div class="controls">
+        <button id="talk-btn" class="btn btn-talk">
+          <span class="mic-icon">&#127908;</span>
+          <span id="talk-label">Hold to Talk</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Post-call screen -->
+    <div id="result-screen" class="screen">
+      <div class="result-header" id="result-header">
+        <img src="/static/ava_bot.png" alt="Ava">
+        <span id="result-text"></span>
+      </div>
+      <div class="result-transcript" id="result-transcript"></div>
+      <button class="btn btn-primary" onclick="resetCall()">Start New Call</button>
+    </div>
+
+  </div>
+
+  <audio id="ava-audio" autoplay></audio>
+  <script src="/static/script.js"></script>
+</body>
+</html>

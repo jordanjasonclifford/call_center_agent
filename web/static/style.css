@@ -1,0 +1,327 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #fef9e4;
+  color: #2d1b4e;
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 720px;
+  padding: 32px 24px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+header h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #2d1b4e;
+}
+
+header h1 span {
+  color: #a78bfa;
+  font-weight: 400;
+}
+
+.version-badge {
+  background: #ede9fe;
+  border: 1px solid #c4b5fd;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  color: #7c3aed;
+}
+
+/* Screens */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* Ava avatar */
+.ava-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+  gap: 10px;
+}
+
+.ava-intro img {
+  width: 100px;
+  height: auto;
+  image-rendering: pixelated;
+  transform: scaleX(0.6);
+}
+
+.ava-intro-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d1b4e;
+}
+
+.ava-intro-tagline {
+  font-size: 0.8rem;
+  color: #7c6fa0;
+}
+
+/* Setup screen */
+#setup-screen h2 {
+  font-size: 1rem;
+  color: #7c6fa0;
+  margin-bottom: 20px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.persona-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.persona-card {
+  background: #fff;
+  border: 1.5px solid #e2d9f3;
+  border-radius: 14px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.persona-card:hover {
+  border-color: #c4b5fd;
+  background: #faf5ff;
+  box-shadow: 0 2px 12px rgba(167,139,250,0.15);
+}
+
+.persona-card.selected {
+  border-color: #a78bfa;
+  background: #f5f0ff;
+  box-shadow: 0 2px 16px rgba(167,139,250,0.25);
+}
+
+.persona-name {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 2px;
+  color: #2d1b4e;
+}
+
+.persona-role {
+  font-size: 0.8rem;
+  color: #a78bfa;
+  margin-bottom: 6px;
+}
+
+.persona-desc {
+  font-size: 0.82rem;
+  color: #7c6fa0;
+}
+
+/* Buttons */
+.btn {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: #a78bfa;
+  color: #fff;
+  width: 100%;
+  box-shadow: 0 4px 14px rgba(167,139,250,0.35);
+}
+
+.btn-primary:hover:not(:disabled) {
+  opacity: 0.9;
+  box-shadow: 0 6px 18px rgba(167,139,250,0.45);
+}
+
+/* Call screen */
+.call-header {
+  margin-bottom: 20px;
+}
+
+.call-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ava-call-avatar {
+  width: 72px;
+  height: auto;
+  image-rendering: pixelated;
+  transform: scaleX(0.6);
+}
+
+#call-persona-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d1b4e;
+}
+
+.call-status {
+  font-size: 0.78rem;
+  color: #7c3aed;
+  background: #ede9fe;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.transcript {
+  background: #fff;
+  border: 1.5px solid #e2d9f3;
+  border-radius: 14px;
+  padding: 20px;
+  height: 360px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(167,139,250,0.08);
+}
+
+.transcript:empty::before {
+  content: "Call starting...";
+  color: #c4b5fd;
+  font-size: 0.9rem;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 85%;
+}
+
+.message.ava { align-self: flex-start; }
+.message.lead { align-self: flex-end; }
+
+.message-label {
+  font-size: 0.7rem;
+  color: #b8a9d0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.message.lead .message-label { text-align: right; }
+
+.message-bubble {
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.message.ava .message-bubble {
+  background: #f0ebff;
+  color: #2d1b4e;
+  border-bottom-left-radius: 3px;
+}
+
+.message.lead .message-bubble {
+  background: #d1fae5;
+  color: #065f46;
+  border-bottom-right-radius: 3px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-talk {
+  background: #fff;
+  border: 2px solid #c4b5fd;
+  color: #2d1b4e;
+  padding: 18px 40px;
+  border-radius: 999px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.15s;
+  user-select: none;
+  box-shadow: 0 2px 10px rgba(167,139,250,0.15);
+}
+
+.btn-talk:hover { border-color: #a78bfa; box-shadow: 0 4px 16px rgba(167,139,250,0.25); }
+
+.btn-talk.recording {
+  background: #fff1f2;
+  border-color: #fb7185;
+  color: #e11d48;
+  box-shadow: 0 4px 16px rgba(251,113,133,0.25);
+}
+
+.btn-talk.processing {
+  background: #fefce8;
+  border-color: #fbbf24;
+  color: #92400e;
+  cursor: wait;
+}
+
+/* Result screen */
+.result-header {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.result-header img {
+  width: 72px;
+  height: auto;
+  image-rendering: pixelated;
+  transform: scaleX(0.6);
+}
+
+.result-header.success { background: #d1fae5; color: #065f46; border: 1.5px solid #6ee7b7; }
+.result-header.failed  { background: #ffe4e6; color: #9f1239; border: 1.5px solid #fda4af; }
+.result-header.neutral { background: #f3f4f6; color: #374151; border: 1.5px solid #d1d5db; }
+
+.result-transcript {
+  background: #fff;
+  border: 1.5px solid #e2d9f3;
+  border-radius: 14px;
+  padding: 20px;
+  max-height: 320px;
+  overflow-y: auto;
+  margin-bottom: 24px;
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: #4b3d6e;
+}

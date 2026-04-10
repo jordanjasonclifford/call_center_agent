@@ -1,0 +1,13 @@
+{
+  "name": "g1-call-center-agent",
+  "version": "1.0.0",
+  "description": "Self-improving AI sales call agent — conducts calls, analyzes outcomes, iterates its own script",
+  "scripts": {
+    "start": "npx n8n start",
+    "dev": "npx n8n start"
+  },
+  "dependencies": {
+    "@elevenlabs/n8n-nodes-elevenlabs": "^0.2.4",
+    "n8n": "2.14.0"
+  }
+}

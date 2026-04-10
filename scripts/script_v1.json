@@ -1,0 +1,17 @@
+{
+  "script_version": 1,
+  "product": "SalesNest",
+  "tagline": "The CRM your sales team will actually use",
+  "success_metric": "Lead agrees to a 10-minute demo",
+  "opener": "Hey, this is Ava from SalesNest — I'll keep this under a minute. We help sales managers ditch the spreadsheets or cut their Salesforce bill in half. Is that worth 30 seconds?",
+  "discovery": "How are you currently tracking your deals and pipeline — are you in a CRM or something more... homegrown?",
+  "value_pitch": "SalesNest sets up in a day, not 3 months. No implementation fee, no consultant needed. Your reps actually log their calls because it takes 10 seconds, not 10 fields.",
+  "objection_handlers": {
+    "too_expensive": "I hear that a lot from teams coming off Salesforce. We're about a third of the price and you're not paying for features your team will never touch. Most teams break even in the first month.",
+    "already_have_crm": "Totally fair — can I ask, are your reps actually using it? Because we hear that a lot. The tool exists but adoption is like 40%. That's the problem we fix.",
+    "not_the_right_time": "Completely understand. When IS a good time — because the reason most teams reach out to us is right after a bad quarter when they realise they can't see their pipeline clearly. Just something to keep in mind.",
+    "send_info": "I can do that. But honestly the info looks like every other CRM deck — the demo is where it clicks. Can I grab 10 minutes this week so you can actually see it?"
+  },
+  "close": "Would you be open to a 10-minute demo this week — no pitch, just show you the product?",
+  "fallback": "No worries at all — I appreciate your time. If things change, we're easy to find."
+}

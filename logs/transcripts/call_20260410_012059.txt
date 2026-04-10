@@ -1,0 +1,21 @@
+Outcome: neutral
+Script version used: 2
+Analysis: {
+  "outcome": "neutral",
+  "primary_objection": "send_info",
+  "failure_point": "close",
+  "reached_close": true,
+  "recommendation": "When the lead asks to send an email, attempt to lock in a specific follow-up time before ending the call to avoid the email being ignored."
+}
+
+AVA: Hey, this is Ava from SalesNest — quick question, takes 20 seconds. Do your reps actually log their activity in whatever tool you're using, or does your pipeline visibility basically depend on who remembers to update it?
+LEAD: Whoa, hold on, I'm doing a task right now. I don't have too much time to talk
+AVA: Totally get it — this'll be quick, I promise. Do your reps actually stay on top of logging their activity, or is your pipeline visibility a bit hit or miss?
+LEAD: It can be a hit or miss, but what are you offering me today?
+AVA: SalesNest is a CRM your reps will actually use — sets up in a day, no implementation fee, and logging a call takes 10 seconds instead of filling out 10 fields. Would you be open to a 10-minute demo this week so you can see it in action?
+LEAD: Look, as you can see I'm in the middle of something, so you can just reach out to me later, okay?
+AVA: Completely fair — when's a better time to reach you so I'm not catching you mid-task?
+LEAD: Look just send me an email at Devonman at gmail.com. Okay, I got to go
+AVA: Got it, I'll send something over to devonman@gmail.com. No worries at all — I appreciate your time!
+
+[OUTCOME: neutral]

@@ -1,0 +1,289 @@
+{
+  "name": "Demo_Improvement_Loop",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "bb4f0a11-d791-4bc6-b51d-f50633f2eef1",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-5-20250929",
+          "cachedResultName": "Claude Sonnet 4.5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        144,
+        208
+      ],
+      "id": "917a952a-07cf-4940-a41e-e97126744fb4",
+      "name": "Anthropic Chat Model",
+      "credentials": {
+        "anthropicApi": {
+          "id": "PryvsmmUpjWm6wyZ",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-5-20250929",
+          "cachedResultName": "Claude Sonnet 4.5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        672,
+        160
+      ],
+      "id": "c3b2c39d-0e4b-4224-bbdd-4967d00917d6",
+      "name": "Anthropic Chat Model1",
+      "credentials": {
+        "anthropicApi": {
+          "id": "PryvsmmUpjWm6wyZ",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        1232,
+        -48
+      ],
+      "id": "979960dc-5a07-4ba6-8341-ce89ccec5f03",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a sales call analyst. Here is a transcript of a sales call:\n\n{{ $json.transcript }}\n\nOutcome: {{ $json.outcome }}\n\nReturn ONLY valid JSON with this exact structure — no explanation, no markdown:\n\n{\n  \"outcome\": \"success\",\n  \"primary_objection\": \"too_expensive\" or \"already_have_crm\" or \"not_the_right_time\" or \"send_info\" or \"none\",\n  \"failure_point\": \"opener\" or \"discovery\" or \"value_pitch\" or \"objection_handler\" or \"close\" or \"none\",\n  \"reached_close\": true,\n  \"recommendation\": \"one sentence on what to change\"\n}\n",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        208,
+        0
+      ],
+      "id": "d83d057a-b6a8-4dbd-91b7-73db09a0f66b",
+      "name": "LLM Analyst"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a sales script optimizer. Here is the current script:\n\n{{ $json.script }}\n\nHere is the analysis of the last call:\n{{ $json.analysis }}\n\nRules:\n- ONLY edit the section identified in failure_point\n- If failure_point is \"objection_handler\", only edit the handler for primary_objection\n- Do NOT rewrite sections that are working\n- Keep the same JSON structure\n- Increment script_version by 1\n\nReturn ONLY the updated script JSON. No explanation, no markdown.\n",
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        736,
+        -48
+      ],
+      "id": "1265a2e7-775f-4416-ade8-f36a5bc5b22b",
+      "name": "LLM Optimizer"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d14cf259-d567-4713-850d-cc1d73eadda1",
+              "name": "analysis",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            },
+            {
+              "id": "df3099ea-6199-48dc-acf7-c80b509ef6ff",
+              "name": "script",
+              "value": "={{ $('When Executed by Another Workflow').item.json.script }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        528,
+        -48
+      ],
+      "id": "b40ffec0-77ac-4fbe-8e15-c91855204b7f",
+      "name": "Format Analysis"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8494bc90-7e6a-4b5e-886f-5e622c5eaf8f",
+              "name": "clean_script",
+              "value": "={{ $json.text.replace(/^```json\\s*/, '').replace(/```\\s*$/, '').trim() }}\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1024,
+        -48
+      ],
+      "id": "334a8fef-7c46-4604-bfb8-9a5f796c7fa3",
+      "name": "Strip JSON Fences, Formatting"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "scripts/current_script.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1.1,
+      "position": [
+        1456,
+        -48
+      ],
+      "id": "992c7af6-1807-406f-9903-d4eb90e611d3",
+      "name": "Update JSON in current_script.json"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "LLM Analyst",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "LLM Analyst",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "LLM Optimizer",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Update JSON in current_script.json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LLM Analyst": {
+      "main": [
+        [
+          {
+            "node": "Format Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LLM Optimizer": {
+      "main": [
+        [
+          {
+            "node": "Strip JSON Fences, Formatting",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Analysis": {
+      "main": [
+        [
+          {
+            "node": "LLM Optimizer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Strip JSON Fences, Formatting": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "3f9e3609-790d-4a88-a059-e4ab31025528",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3cba8292468c83e3881b8c5c0d4e870543f863d70eea623e1ab9673c0174df58"
+  },
+  "id": "taLpLYvz2eZqBFmy",
+  "tags": [
+    {
+      "updatedAt": "2026-04-10T02:34:42.861Z",
+      "createdAt": "2026-04-10T02:34:42.861Z",
+      "id": "l1Tde2botiTi2was",
+      "name": "N8N_DEMO"
+    }
+  ]
+}
