@@ -57,7 +57,7 @@ call_center_agent/
 ### 1. Clone and install
 
 ```bash
-git clone <repo>
+git clone https://github.com/jordanjasonclifford/call_center_agent.git
 cd call_center_agent
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
@@ -184,6 +184,7 @@ The system uses a simple Analyst → Optimizer loop instead of multiple competin
 
 **Section-level updates instead of full rewrites**  
 Only rewriting the failing section prevents breaking parts of the script that already work; the downside is slower overall optimization.
+
 ---
 
 ## Business Impact & Real-World Value
