@@ -1,0 +1,28 @@
+.git
+.gitignore
+
+# Local secrets and machine-specific settings
+.env
+
+# Python local environment and caches
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node/n8n dependencies and caches
+node_modules/
+npm-debug.log*
+
+# Runtime output
+logs/
+*.mp3
+*.wav
+*.webm
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/

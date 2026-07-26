@@ -101,6 +101,34 @@ python call_agent.py
 
 Select a persona; press Enter to start and stop recording each turn.
 
+### Docker
+
+Build the local Docker image:
+
+```bash
+docker build -t salesnest .
+```
+
+Run the Flask web app in Docker:
+
+```bash
+docker run --env-file .env -p 5000:5000 salesnest
+```
+
+Open `http://localhost:5000` in your browser. Press `Ctrl+C` in the terminal to stop the container.
+
+You can also use Docker Compose to build and run the web app with one command:
+
+```bash
+docker compose up --build
+```
+
+To stop and remove the Compose container and network:
+
+```bash
+docker compose down
+```
+
 ---
 
 ## Architecture
