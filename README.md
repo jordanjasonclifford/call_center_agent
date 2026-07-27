@@ -129,6 +129,28 @@ To stop and remove the Compose container and network:
 docker compose down
 ```
 
+### Quality Checks
+
+Install development dependencies:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
+Run linting:
+
+```bash
+python -m ruff check .
+```
+
+Run tests:
+
+```bash
+python -m pytest
+```
+
+GitHub Actions runs these checks automatically on push and pull request.
+
 ---
 
 ## Architecture
