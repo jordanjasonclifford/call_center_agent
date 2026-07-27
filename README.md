@@ -151,6 +151,63 @@ python -m pytest
 
 GitHub Actions runs these checks automatically on push and pull request.
 
+### Kubernetes
+
+Kubernetes manifests live in `deploy/k8s/`:
+
+- `deployment.yml` runs the SalesNest Flask container
+- `service.yml` exposes the app on port `5000`
+
+For local testing with Docker Desktop Kubernetes enabled, first confirm the cluster is running:
+
+```bash
+kubectl cluster-info
+```
+
+Create the app secret from your local `.env` file:
+
+```bash
+kubectl create secret generic salesnest-secrets --from-env-file=.env
+```
+
+Apply the manifests:
+
+```bash
+kubectl apply -f deploy/k8s/
+```
+
+Check the running pod and service:
+
+```bash
+kubectl get pods
+kubectl get services
+```
+
+Forward the Kubernetes service to your local machine:
+
+```bash
+kubectl port-forward service/salesnest-web 5000:5000
+```
+
+Open `http://localhost:5000` in your browser. Press `Ctrl+C` to stop port forwarding.
+
+To remove the local Kubernetes resources:
+
+```bash
+kubectl delete -f deploy/k8s/
+kubectl delete secret salesnest-secrets
+```
+
+### Why This DevOps Setup Matters
+
+Docker packages SalesNest with its Python runtime, dependencies, and `ffmpeg`, so other developers can run the app without manually recreating your local setup.
+
+Docker Compose turns the longer Docker build/run commands into a repeatable one-command local workflow.
+
+GitHub Actions runs linting and tests automatically on push and pull request, which helps catch basic breakage before changes settle into the repo.
+
+Kubernetes shows how the same containerized app can be described for a production-style environment, with the running app, service exposure, and secrets managed separately.
+
 ---
 
 ## Architecture
